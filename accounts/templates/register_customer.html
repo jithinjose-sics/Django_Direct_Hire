@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+  <title>Registration</title>
+  <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--    <link rel="stylesheet" href="{% static 'css/style1.css' %}">-->
+  <style>
+
+  </style>
+</head>
+<body class="bgcolor">
+ 
+<a href="/" class="previous round" style="margin-left: 1400px;"><u>Back</u></a>
+
+<div class = "container">
+    <center><h1><u>Customer Registration</u></h1></center>
+
+<form method="POST">
+    {%csrf_token%}
+    {% bootstrap_form user %}
+    {% bootstrap_form customer %}
+    <input type="submit" class = "btn btn-success" value="REGISTER">
+</form>
+    {% if messages %}
+    {% for i in messages %}
+<script>
+   alert("Hello! I am an alert box!!");
+</script>
+{% endfor %}
+    {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <!--<a href="/" class="w3-bar-item w3-button"><b>BLUE</b> COLLAR</a>-->
+
+    <img src="{%static 'images/bluecollarlogo.png' %}" style="width:20%">
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/" class="w3-bar-item w3-button">HOME</a>
+      <a href="#" class="w3-bar-item w3-button">About</a>
+
+<!--      <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">-->
+<!--      Jeans <i class="fa fa-caret-down"></i>-->
+      <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-bar-item w3-button w3-light-grey" id="myBtn"><i class="fa fa-caret-right w3-margin-right"></i>User</a>
+       <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+         {% if user.is_authenticated %}
+         {% ifequal request.user.user_type 2 %}
+          <a href="" class="w3-bar-item w3-button"><strong>Hi Employee, {{request.user.username}}</strong></a>
+          <a href="{% url 'accounts:logout' %}" class="w3-bar-item w3-button"><strong>LOGOUT</strong></a>
+          <a href="{% url 'accounts:notification' %}" class="w3-bar-item w3-button"><strong>NOTIFICATIONS</strong></a>
+         <a href="{% url 'accounts:confirmed' %}" class="w3-bar-item w3-button"><strong>CONFIRMED LIST</strong></a>
+         {% else %}
+         <a href="" class="w3-bar-item w3-button"><strong>Hi Customer, {{request.user.username}}</strong></a>
+         <a href="{% url 'accounts:logout' %}" class="w3-bar-item w3-button"><strong>LOGOUT</strong></a>
+         <a href="{% url 'accounts:booked' %}" class="w3-bar-item w3-button"><strong>BOOKED LIST</strong></a>
+         {% endifequal %}
+
+         {% else %}
+         <a href="{% url 'accounts:reg_cust' %}" class="w3-bar-item w3-button"><strong>REGISTER AS CUSTOMER</strong></a>
+         <a href="{% url 'accounts:reg_cust2' %}" class="w3-bar-item w3-button"><strong>REGISTER AS CUSTOMER 2</strong></a>
+         <a href="{% url 'accounts:reg_emp' %}" class="w3-bar-item w3-button"><strong>REGISTER AS EMPLOYEE</strong></a>
+         <a href="{% url 'accounts:reg_emp2' %}" class="w3-bar-item w3-button"><strong>REGISTER AS EMPLOYEE 2</strong></a>
+         <a href="{% url 'accounts:login' %}" class="w3-bar-item w3-button"><strong>      LOGIN    </strong></a>
+         <a href="{% url 'accounts:login2' %}" class="w3-bar-item w3-button"><strong>      LOGIN2    </strong></a>
+         {% endif %}
+<!--      <a href="#" class="w3-bar-item w3-button">Relaxed</a>-->
+<!--      <a href="#" class="w3-bar-item w3-button">Bootcut</a>-->
+<!--      <a href="#" class="w3-bar-item w3-button">Straight</a>-->
+       </div>
+    </div>
+
+    </div>
+  </div>

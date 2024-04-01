@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<div>
+  
+  <div class="w3-content w3-padding" style="max-width:1564px">
+    <!-- Project Section -->
+    <!-- <div class="w3-container w3-padding-32" id="projects">
+      <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16"></h3>
+    </div> -->
+      {% ifequal request.user.user_type 1 %}
+        <p>
+            {% include 'status.html' %}
+            <br>
+            <div class="row">
+                <div class="col-md-5">
+                    <h5>Employee's Contact Details:
+                        <hr>
+                        <div class="card card-body">
+                            <!-- <a class="btn btn-primary btn-sm btn-block" href="">Create Customer</a> -->
+                            <!-- <br>
+                            <br> -->
+                            <table class="table table-sm">
+                                <tr>
+                                    <!-- <th></th> -->
+                                    <th>Employee</th>
+                                    <th>Phone</th>
+                                    <th>Job</th>
+                                </tr>
+                                {% if approved_orders %}
+                                  {% for emp in approved_orders %}
+                                      <tr>
+                                          <!-- <td><a class="btn btn-sm btn-info" href=''>view</a></td> -->
+                                          <td>{{emp.emp_name}}</td>
+                                          <td>{{emp.phone}}</td>
+                                          <td>{{emp.job}}</td>
+                                      </tr>
+                                  {% endfor %}
+                                {% endif %}
+                            </table>
+                        </div>
+                    </h5>
+                </div>
+            
+                <div class="col-md-7">
+                    <h5>My Job Requests</h5>
+                    <hr>
+                    <div class="card card-body">
+                        <!-- <a class="btn btn-primary btn-sm btn-block" href="">Create Order</a> -->
+                        
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Employee</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Job</th>
+                                <th></th>
+                            </tr>
+                            {% if customer_orders %}
+                              {% for order in customer_orders %}
+                                  <tr>
+                                      <td>{{order.emp_name}}</td>
+                                      <td>{{order.date}}</td>
+                                      <td>{{order.location}}</td>
+                                      <td>{{order.phone}}</td>
+                                      <td>{{order.status}}</td>
+                                      <td>{{order.job}}</td>
+                                      {% if order.status == 'Unapproved' %}
+                                        <!-- <td><a class="btn btn-sm btn-danger" href="">Cancel</a></td> -->
+                                        <td></td>
+                                      {% elif order.status == 'Approved' %}
+                                        <td><a class="btn btn-sm btn-info" href="{% url 'accounts:close_order' order.id %}">Close</a></td>
+                                      {% endif %}
+                                  </tr>
+                              {% endfor %}
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </p>
+      {% endifequal %}
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
+
+<script>
+function myAccFunc() {
+  var x = document.getElementById("demoAcc");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+{% endblock body %}

@@ -1,0 +1,66 @@
+  .fontc{
+    font-size:18px;
+    color:white
+    }
+  .bgcolor{
+    background: url("../images/t.jpg");
+     background-repeat: no-repeat;
+      background-size: cover;
+
+     }
+    .homebgcolor{
+    background: url("../images/b.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+     }
+
+     table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 80%;
+  border: 1px solid #ddd;
+  margin-top: 60px;
+  margin-left: 240px;
+
+}
+h1{
+  margin-left: 600px;
+  color:white
+}
+
+.previous {
+
+    color: black;
+  }
+
+.round {
+  border-radius: 50%;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+
+/* Make the image fully responsive */
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+
+.mySlides {display:none;}
+
+.backgroundform
+{
+  background-color: aquamarine;
+}
+

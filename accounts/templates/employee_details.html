@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+<!-- <style>
+    .card table{
+        max-width: 1100px;
+    }
+</style> -->
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <h5>Employee Details:
+            <hr>
+            <div class="card card-body">
+                <!-- <a class="btn btn-primary btn-sm btn-block" href="#">Create Customer</a> -->
+                <div class="row">
+                    <div class="col-md-4">Name</div>
+                    <div class="col-md-8">{{emp.name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Phone</div>
+                    <div class="col-md-8">{{emp.contact}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">City</div>
+                    <div class="col-md-8">{{emp.city}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Salary</div>
+                    <div class="col-md-8">{{emp.amountperhour}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Experience</div>
+                    <div class="col-md-8">{{emp.experience}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Rating</div>
+                    <div class="col-md-8">{{emp.emp_rating}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Aaadhar</div>
+                    <div class="col-md-8">{{emp.adharno}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Address</div>
+                    <div class="col-md-8">{{emp.address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Zip</div>
+                    <div class="col-md-8">{{emp.zipcode}}</div>
+                </div>
+                <!-- <table class="table table-sm">
+                    <tr>
+                        <th></th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                    </tr>
+                    {% for customer in customers %}
+                        <tr>
+                            <td><a class="btn btn-sm btn-info" href='#'>view</a></td>
+                            <td>{{customer.name}}</td>
+                            <td>{{customer.phone}}</td>
+                        </tr>
+                    {% endfor %}
+                </table> -->
+            </div>
+        </h5>
+    </div>
+
+    <div class="col-md-6    ">
+        <h5>Book Appointment</h5>
+        <hr>
+        <div class="card card-body">
+            <!-- <table class="table table-sm ">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Salary</th>
+                    <th>Experience</th>
+                    <th>Aadhar</th>
+                    <th>Address</th>
+                    <th>Zip</th>
+                </tr>
+                {% for emp in emp_list %}
+                    <tr>
+                        <td><a href="{% url 'accounts:employeedetails' emp.id %}">{{emp.name}}</a></td>
+                        <td>{{emp.contact}}</td>
+                        <td>{{emp.city}}</td>
+                        <td>{{emp.amountperhour}}</td>
+                        <td>{{emp.experience}}</td>
+                        <td>{{emp.adharno}}</td>
+                        <td>{{emp.address}}</td>
+                        <td>{{emp.zipcode}}</td>
+                    </tr>
+                {% endfor %}
+            </table> -->
+            <form method="POST" action="">
+                {% csrf_token %}
+                <label for="worktime" style="color:black">Select Date and Time</label>
+                <input type="datetime-local" id="worktime" name="worktime" required class="form-control" >
+                <p style="color:black">*Please Enter date in mm/dd/yyy format</p>
+                <br>
+                <label for="location" style="color:black">Enter Your Location </label>
+                <textarea id="location" name="location" rows="2" cols="50" class="form-control" required></textarea>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Book Appointment">
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

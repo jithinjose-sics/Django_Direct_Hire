@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<div>
+  
+  <div class="w3-content w3-padding" style="max-width:1564px">
+    <!-- Project Section -->
+    <!-- <div class="w3-container w3-padding-32" id="projects">
+      <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16"></h3>
+    </div> -->
+      {% ifequal request.user.user_type 2 %}
+        <p>
+            {% include 'status.html' %}
+            <br>
+            <div class="row">
+                <div class="col-md-5">
+                    <h5>CUSTOMERS:
+                        <hr>
+                        <div class="card card-body">
+                            <!-- <a class="btn btn-primary btn-sm btn-block" href="">Create Customer</a> -->
+                            <!-- <br>
+                            <br> -->
+                            <table class="table table-sm">
+                                <tr>
+                                    <!-- <th></th> -->
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Date</th>
+                                    <th>Rating</th>
+                                </tr>
+                                {% if approved_cus_contacts %}
+                                  {% for customer in approved_cus_contacts %}
+                                      <tr>
+                                          <!-- <td><a class="btn btn-sm btn-info" href=''>view</a></td> -->
+                                          <td>{{customer.name}}</td>
+                                          <td>{{customer.phone}}</td>
+                                          <td>{{customer.date}}</td>
+                                          <td></td>
+                                      </tr>
+                                  {% endfor %}
+                                {% endif %}
+                                {% if closed_cus_contacts %}
+                                  {% for customer in closed_cus_contacts %}
+                                      <tr>
+                                          <!-- <td><a class="btn btn-sm btn-info" href=''>view</a></td> -->
+                                          <td>{{customer.name}}</td>
+                                          <td>{{customer.phone}}</td>
+                                          <td>{{customer.date}}</td>
+                                          <td>{{customer.rating}}</td>
+                                      </tr>
+                                  {% endfor %}
+                                {% endif %}
+                            </table>
+                        </div>
+                    </h5>
+                </div>
+            
+                <div class="col-md-7">
+                    <h5>Unapproved Job Requests</h5>
+                    <hr>
+                    <div class="card card-body">
+                        <!-- <a class="btn btn-primary btn-sm btn-block" href="">Create Order</a> -->
+                        
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Address</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            {% if unapproved_orders_list %}
+                              {% for order in unapproved_orders_list %}
+                                  <tr>
+                                      <td>{{order.name}}</td>
+                                      <td>{{order.date}}</td>
+                                      <td>{{order.location}}</td>
+                                      <td>{{order.address}}</td>
+                                      <td><a class="btn btn-sm btn-info" href="{% url 'accounts:approve_order' order.id %}">Approve</a></td>
+                                      <td><a class="btn btn-sm btn-danger" href="">Cancel</a></td>
+                                  </tr>
+                              {% endfor %}
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </p>
+      {% else %}
+        <div class="w3-row-padding">
+            {% for list in job_list %}
+          <div class="w3-col l3 m6 w3-margin-bottom">
+            <div class="w3-display-container">
+                
+
+            </div>
+          </div>
+              {% endfor %}
+        </div>
+      {% endifequal %}
+  </div>
+</div>
+
+
+<script>
+function myAccFunc() {
+  var x = document.getElementById("demoAcc");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+{% endblock body %}

@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block body %}
+<style>
+    .center-text{
+      text-align: center;
+      font-size: 36px;
+      color: #4054b2;
+    }
+    .custom-text{
+      text-align: justify;
+      font-size: 16px;
+    }
+</style>
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+            <img src="{% static 'images/bluecollarlogo.png' %}">
+			<!-- <div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  	</div>
+			  	<div class="card-body">
+			  	</div>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+<h2 class="w3-padding center-text">Introduction about the website</h2>
+<p class="about-text w3-padding custom-text">
+    Considering the need for getting semi-skilled workers on the digital platform and making them be a part of a transforming India, this job portal is introduced to recruit labors with ease. With the development of infrastructure and the ever increasing requirement for manpower, it is imperative to keep up the working hands in the top of the project hierarchy.
+    India is viewed as one of the fastest growing economies, however, we still have enormous unemployment deficit. Altering this issue into a strength to build the infrastructure, not only resolves one of the biggest problems of our nation but also gives an opportunity to the deserving labors.
+</p>
+<h2 class="w3-padding center-text">Introduction about the website</h2>
+<p class="about-text w3-padding custom-text">
+    Considering the need for getting semi-skilled workers on the digital platform and making them be a part of a transforming India, this job portal is introduced to recruit labors with ease. With the development of infrastructure and the ever increasing requirement for manpower, it is imperative to keep up the working hands in the top of the project hierarchy.
+    India is viewed as one of the fastest growing economies, however, we still have enormous unemployment deficit. Altering this issue into a strength to build the infrastructure, not only resolves one of the biggest problems of our nation but also gives an opportunity to the deserving labors.
+</p>
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Total Job Requests</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<img src="{% static 'images/bluecollarlogo.png' %}">
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Unapproved Job Requests</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<img src="{% static 'images/bluecollarlogo.png' %}">
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Completed Jobs</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<img src="{% static 'images/bluecollarlogo.png' %}">
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

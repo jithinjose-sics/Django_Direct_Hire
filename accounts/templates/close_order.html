@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<br>
+<br>
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<!-- <div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title"></h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title"></h3>
+			  	</div>
+			</div> -->
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+                {% if date_check %}
+                <h5 style="color:black">You are closing the job before the actual date!</h5>
+                {% endif %}
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <br>
+                    <label for="emp_rating" style="color:white">Rate your experience</label>
+                    <select name="emp_rating" id="emp_rating" required>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                    <!-- <input type="datetime-local" id="worktime" name="worktime" required class="form-control" > -->
+                    <!-- <p style="color:black">*Please Enter date in mm/dd/yyy format</p> -->
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Confirm">
+                    <br>
+                    <br>
+                </form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<!-- <div class="card text-center text-white  mb-3" id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title"></h5>
+                </div>
+                <div class="card-body">
+                  <h3 class="card-title">{{ total_orders_count }}</h3>
+                </div>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+
+{% endblock body %}
