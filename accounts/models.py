@@ -34,7 +34,12 @@ class Customer(models.Model):
     users = models.OneToOneField(NewUser, on_delete=models.CASCADE, null= True)
     name = models.CharField(max_length=34, null=True, blank=True)
     contact = models.CharField(max_length=11, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
-    adharno = models.CharField(max_length=14, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    adharno = models.CharField(
+        max_length=12,
+        null=True,
+        blank=True,
+        validators=[RegexValidator(r'^\d{12}$', message='Aadhar number must be a 12-digit number')]
+    )
     address = models.CharField(max_length=34, null=True, blank=True)
     zipcode = models.CharField(max_length=6, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
     city = models.CharField(max_length=200, null=True, choices=CITY_CHOICES)
@@ -50,7 +55,12 @@ class Employee(models.Model):
     experience = models.CharField(max_length=34, null=True, blank=True)
     amountperhour = models.CharField(max_length=34, null=True, blank=True)
     contact = models.CharField(max_length=11, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
-    adharno = models.CharField(max_length=12, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    adharno = models.CharField(
+        max_length=12,
+        null=True,
+        blank=True,
+        validators=[RegexValidator(r'^\d{12}$', message='Aadhar number must be a 12-digit number')]
+    )
     address = models.CharField(max_length=200, null=True, blank=True)
     zipcode = models.CharField(max_length=6, null=True, blank=True, validators=[RegexValidator(r'^\d{1,10}$')])
     city = models.CharField(max_length=34, null=True, choices=CITY_CHOICES)

@@ -30,6 +30,12 @@
         {% endif %}
 
         {% if user.is_authenticated %}
+          <li class="hello-msg">
+              <a class="nav-link" href="{% url  'chat:users_list' %}">Users List</a>
+          </li>
+          <li class="hello-msg">
+            <a class="nav-link" href="{% url  'chat:messages_list' %}">Messages</a>
+        </li>
           {% ifequal request.user.user_type 1 %}
             <li class="hello-msg">
               <a class="nav-link" href="{% url 'accounts:customer_orders' %}">My Orders</a>
