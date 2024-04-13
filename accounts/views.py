@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-
+from django.http import HttpResponseRedirect
 from .models import *
 from .forms import *
 from .filters import *
@@ -203,14 +203,26 @@ def CustomerOrders(request):
     }
     return render(request, 'customer_orders.html', context)
 
+from django.http import HttpResponseRedirect
+
 def CloseOrder(request, pk):
     date_check = False
     order = WorkDetails.objects.get(id=pk)
-    if request.method == 'POST':
-        emp_rating = int(request.POST['emp_rating'])
-        print("This is working---------{}".format(emp_rating))
+
+    # Check if the request is coming from an employee
+    if request.user.user_type == 2:
+        # If it's an employee, mark the order as closed and return to the employee page
         order.job_status = 'Closed'
-        order.rating = emp_rating
+        order.save()
+        return redirect('/employeepage')
+
+    if request.method == 'POST':
+        # If it's a customer, check if the order date is valid for closure
+        emp_rating = int(request.POST.get('emp_rating', 0))
+        if emp_rating and 1 <= emp_rating <= 5:
+            order.rating = emp_rating
+
+        order.job_status = 'Closed'
         order.save()
         emp = order.employee_id
         emp_closed_orders = emp.workdetails_set.filter(job_status='Closed')
@@ -220,16 +232,13 @@ def CloseOrder(request, pk):
         emp.emp_rating = avg_emp_rating
         emp.save()
         return redirect('/customerorders')
-    utc=pytz.UTC
+
+    utc = pytz.UTC
     order_date = order.date
     current_date = utc.localize(datetime.now())
-    print('order date   :{}'.format(order_date))
-    print('current date :{}'.format(current_date))
-    if current_date<order_date:
-        print('Hello this is cool')
+    if current_date < order_date:
         date_check = True
-        print(date_check)
-    # print('---------------Reached here----------{}'.format(order.job_status))
+
     context = {'date_check': date_check}
     return render(request, 'close_order.html', context)
 

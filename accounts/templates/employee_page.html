@@ -78,7 +78,7 @@
                                       <td>{{order.location}}</td>
                                       <td>{{order.address}}</td>
                                       <td><a class="btn btn-sm btn-info" href="{% url 'accounts:approve_order' order.id %}">Approve</a></td>
-                                      <td><a class="btn btn-sm btn-danger" href="">Cancel</a></td>
+                                      <td><a class="btn btn-sm btn-danger" href="{% url 'accounts:close_order' order.id %}">Cancel</a></td>
                                   </tr>
                               {% endfor %}
                             {% endif %}

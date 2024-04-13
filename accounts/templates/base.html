@@ -13,6 +13,32 @@
     text-align: justify;
     font-size: 16px;
   }
+  .image-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .image-container:hover .image-overlay {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -78,20 +104,20 @@
           <div class="w3-row-padding">
             {% for list in job_list %}
             <div class="w3-col l3 m6 w3-margin-bottom">
-                <div class="w3-display-container">
+                <div class="image-container">
                     {% if user.is_authenticated %}
-                    <a href="#">
+                    <a href="#"  class="image-hover">
                         <img src="{{ list.image.url }}" alt="{{ list.job }}" style="width:100%">
-                        <div class="w3-display-topleft w3-black w3-padding fs-5">
-                            {{ list.job }}
-                        </div>
+                       <div class="image-overlay">
+                    <div>{{ list.job }}</div>
+                </div>
                     </a>
                     {% else %}
-                    <a href="#" onClick="alert('Please Login To Continue !!!')">
+                    <a href="#" onClick="alert('Please Login To Continue !!!')" class="image-hover">
                         <img src="{{ list.image.url }}" alt="{{ list.job }}" style="width:100%">
-                        <div class="w3-display-topleft w3-white w3-padding fs-5">
-                            {{ list.job }}
-                        </div>
+                       <div class="image-overlay">
+                    <div>{{ list.job }}</div>
+                </div>
                     </a>
                     {% endif %}
                 </div>

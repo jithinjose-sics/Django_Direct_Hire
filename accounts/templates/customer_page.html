@@ -1,6 +1,24 @@
 {% extends 'index.html' %}
 {% load bootstrap4 %}
 {% block body %}
+<style>
+  .w3-display-middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  }
+
+  .image-hover:hover .w3-display-middle {
+      opacity: 1;
+  }
+</style>
+
 <div>
   
   <div class="w3-content w3-padding" style="max-width:1564px">
@@ -17,20 +35,19 @@
           <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-display-container">
                 {% if user.is_authenticated %}
-              <!-- <a href="#">{{list.job}}</a> -->
-                <div class="w3-display-topleft w3-black w3-padding">
-                  <a href="{% url 'accounts:emp_list' list.id %}"> {{list.job}}</a>
-                </div>
-                <!--edited--------------------------------------------------->
-              
-                <!----------------------------------------------------------->
-                <img src={{list.image.url}} alt="House" style="width:100%">
+                <a href="{% url 'accounts:emp_list' list.id %}" class="image-hover">
+                  <img src="{{ list.image.url }}" alt="{{ list.job }}" style="width:100%">
+                  <div class="w3-display-middle w3-black w3-padding">
+                    {{ list.job }}
+                  </div>
+                </a>
                 {% else %}
-                <div class="w3-display-topleft w3-black w3-padding">
-                  <a href="{% url 'accounts:emp_list' list.id %}" onClick="alert('Please Login To Continue !!!')"> {{list.job}}</a>
-                </div>
-                <img src={{list.image.url}} alt="House" style="width:100%">
-
+                <a href="#" onClick="alert('Please Login To Continue !!!')" class="image-hover">
+                  <img src="{{ list.image.url }}" alt="{{ list.job }}" style="width:100%">
+                  <div class="w3-display-middle w3-black w3-padding">
+                    {{ list.job }}
+                  </div>
+                </a>
                 {% endif %}
 
             </div>
@@ -54,6 +71,7 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
 </script>
 
 {% endblock body %}
