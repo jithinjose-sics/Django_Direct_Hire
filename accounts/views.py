@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from .models import *
 from .forms import *
 from .filters import *
-
+from django.utils import timezone
 from datetime import date, datetime, time
 import pytz
 
@@ -203,7 +203,6 @@ def CustomerOrders(request):
     }
     return render(request, 'customer_orders.html', context)
 
-from django.http import HttpResponseRedirect
 
 def CloseOrder(request, pk):
     date_check = False
@@ -227,8 +226,9 @@ def CloseOrder(request, pk):
         emp = order.employee_id
         emp_closed_orders = emp.workdetails_set.filter(job_status='Closed')
         closed_ord_count = len(emp_closed_orders)
-        total_rating = sum(int(ordi.rating) for ordi in emp_closed_orders)
-        avg_emp_rating = total_rating/closed_ord_count
+        total_rating = sum(ordi.rating for ordi in emp_closed_orders if ordi.rating is not None)
+        non_none_count = sum(1 for ordi in emp_closed_orders if ordi.rating is not None)
+        avg_emp_rating = total_rating / non_none_count if non_none_count > 0 else 0
         emp.emp_rating = avg_emp_rating
         emp.save()
         return redirect('/customerorders')
@@ -276,27 +276,41 @@ def EmployeePage(request):
     }
     return render(request, 'employee_page.html', context)
 
-
 def EmployeeDetails(request, employee_id):
     emp = Employee.objects.get(id=employee_id)
     customer = Customer.objects.get(users__id=request.user.id)
-    print("Customer name : {}".format(customer.name))
-    context = {'emp':emp}
+    print("Customer name: {}".format(customer.name))
+    context = {'emp': emp, 'employee_id': employee_id}  # Include employee_id in the context
+    
     if request.method == 'POST':
-        time = request.POST['worktime']
-        location = request.POST['location']
-        print("This id customer id {} :".format(customer.id))
-        work = WorkDetails(date=time,location=location,customer_id=customer, employee_id=emp, job_status='Unapproved')
-        work.save()
-        dateTime = work.date
-        location = work.location
-        employeeName = emp.name
-        employeeEmail = emp.user.email
-        customerName = customer.name
-        customerPhone = customer.contact
-        # messages.info(request,"Successfully Boooked ")
-        return redirect('/')
+        time = request.POST.get('worktime')
+        location = request.POST.get('location')
+        current_datetime = timezone.now()
+        
+        tz = pytz.timezone('UTC') 
+        work_datetime = tz.localize(datetime.strptime(time, '%Y-%m-%dT%H:%M'))
+        
+        if work_datetime < current_datetime:
+            messages.error(request, "You cannot book for a past date and time.")
+        else:
+            print("This id customer id: {}".format(customer.id))
+            work = WorkDetails(date=work_datetime, location=location, customer_id=customer, employee_id=emp, job_status='Unapproved')
+            work.save()
+
+            dateTime = work.date
+            location = work.location
+            employeeName = emp.name
+            employeeEmail = emp.user.email
+            customerName = customer.name
+            customerPhone = customer.contact
+
+            # messages.info(request, "Successfully Booked")
+            return redirect('/')  # Redirect to the desired URL after successful booking
+    
+    # Render the same template with error messages if any validation fails
+    context['messages'] = messages.get_messages(request)
     return render(request, 'employee_details.html', context)
+
 
 
 def ApproveOrders(request, pk):

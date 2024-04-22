@@ -97,7 +97,7 @@
                     </tr>
                 {% endfor %}
             </table> -->
-            <form method="POST" action="">
+            <form id="appointmentForm" method="POST" action="">
                 {% csrf_token %}
                 <label for="worktime" style="color:black">Select Date and Time</label>
                 <input type="datetime-local" id="worktime" name="worktime" required class="form-control" >
@@ -106,8 +106,16 @@
                 <label for="location" style="color:black">Enter Your Location </label>
                 <textarea id="location" name="location" rows="2" cols="50" class="form-control" required></textarea>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Book Appointment">
+                <button type="submit" class="btn btn-primary" id="submitBtn">Book Appointment</button>
                 <br>
+                <!-- Check if there are any error messages and display them -->
+                {% if messages %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>
