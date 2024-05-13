@@ -84,32 +84,15 @@ def EmployeeRegister2(request):
 
 def EmployeeRegister3(request):
     if request.method == 'POST':
-        employee = EmployeeForm(data=request.POST)
-        user = request.user
-        print('------------------Emp 3-----------------')
-        print('------------------------',user.username)
-        if employee.is_valid():
-                employee = employee.save(commit=False)
-                employee.user = user
-                employee.save()
-                # messages.info(request,"Successfully Registered")
-                return redirect('/')
-        else:
-            print('-----------------------Employee invalid---------------------')
-            context = {
-                'user':user,
-                'employee': employee
-            }
-            return render(request, 'register_employee3.html', context)
+        employee_form = EmployeeForm(request.POST, request.FILES)
+        if employee_form.is_valid():
+            employee = employee_form.save(commit=False)
+            employee.user = request.user
+            employee.save()
+            return redirect('/')
     else:
-        user = UserForm(data=request.POST)
-        employee = EmployeeForm(data=request.POST)
-        context = {
-            'user':user,
-            'employee': employee
-        }
-    return render(request, 'register_employee3.html', context)
-
+        employee_form = EmployeeForm()
+    return render(request, 'register_employee3.html', {'employee_form': employee_form})
 
 def CustomerRegister2(request):
     print('Customer reg 2')

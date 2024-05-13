@@ -79,69 +79,75 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
-					<form method="POST" action="">
+					<form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							{{ employee.name }}
+							{{ employee_form.name }}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+							</div>
+							{{ employee_form.image }}
 						</div>
 						<div class="input-group mb-2 ">
 							<div class="input-group-append ">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.job }}
+							{{ employee_form.job }}
 							
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.experience }}
+							{{ employee_form.experience }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.amountperhour }}
+							{{ employee_form.amountperhour }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.contact }}
+							{{ employee_form.contact }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.adharno }}
+							{{ employee_form.adharno }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.address }}
+							{{ employee_form.address }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.zipcode }}
+							{{ employee_form.zipcode }}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{ employee.city }}
+							{{ employee_form.city }}
 						</div>
 				   		<div class="d-flex justify-content-center mt-3 login_container">
 				 			<input class="btn login_btn" type="submit" value="Register Employee">
 				   		</div>
 					</form>
                 </div>
-                {{ employee.errors }}
+                {{ employee_form.errors }}
 			</div>
 		</div>
 	</div>
