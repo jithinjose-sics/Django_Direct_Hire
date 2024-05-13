@@ -66,6 +66,7 @@ class Employee(models.Model):
     city = models.CharField(max_length=34, null=True, choices=CITY_CHOICES)
     emp_rating = models.FloatField(max_length=3, null=True, blank=True)
     job_count = models.IntegerField(null=True, blank=True)
+    image = models.ImageField(upload_to='employee_images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

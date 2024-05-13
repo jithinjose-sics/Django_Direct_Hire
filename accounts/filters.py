@@ -9,4 +9,4 @@ class EmployeeFilter(django_filters.FilterSet):
     class Meta:
         model = Employee
         fields = '__all__'
-        exclude = ['user','job','name','experience','amountperhour','contact','adharno','address','zipcode', 'emp_rating', 'job_count', 'rating_count']
+        exclude = ['user','job','name','experience','amountperhour','contact','adharno','address','zipcode', 'emp_rating', 'job_count', 'rating_count','image']

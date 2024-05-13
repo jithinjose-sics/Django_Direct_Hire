@@ -42,6 +42,7 @@ class EmployeeForm(forms.ModelForm):
         attrs={'autocomplete': 'off', 'placeholder': 'ZIP ', 'class': 'form-control', 'id': 'search-bar',
                'required': ''}))
     city = forms.ChoiceField(choices=CITY_CHOICES, required=False)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Employee
